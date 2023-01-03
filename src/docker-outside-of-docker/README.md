@@ -1,5 +1,5 @@
 
-# Docker (Docker-from-Docker) (docker-from-docker)
+# Docker (docker-outside-of-docker) (docker-outside-of-docker)
 
 Re-use the host docker socket, adding the Docker CLI to a container. Feature invokes a script to enable using a forwarded Docker socket within a container to run Docker commands.
 
@@ -7,7 +7,7 @@ Re-use the host docker socket, adding the Docker CLI to a container. Feature inv
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/docker-from-docker:1": {}
+    "ghcr.io/samruddhikhandale/features/docker-outside-of-docker:1": {}
 }
 ```
 
@@ -84,4 +84,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/docker-from-docker/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/docker-outside-of-docker/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
