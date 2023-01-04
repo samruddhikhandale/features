@@ -1,4 +1,5 @@
 
+
 # Nix Package Manager (nix)
 
 Installs the Nix package manager and optionally a set of packages.
@@ -7,7 +8,7 @@ Installs the Nix package manager and optionally a set of packages.
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/nix:1": {}
+    "ghcr.io/samruddhikhandale/features/nix:1": {}
 }
 ```
 
@@ -60,4 +61,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/nix/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/nix/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

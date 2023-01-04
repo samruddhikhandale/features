@@ -1,4 +1,5 @@
 
+
 # NVIDIA CUDA (nvidia-cuda)
 
 Installs shared libraries for NVIDIA CUDA.
@@ -7,7 +8,7 @@ Installs shared libraries for NVIDIA CUDA.
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/nvidia-cuda:1": {}
+    "ghcr.io/samruddhikhandale/features/nvidia-cuda:1": {}
 }
 ```
 
@@ -50,4 +51,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/nvidia-cuda/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/nvidia-cuda/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

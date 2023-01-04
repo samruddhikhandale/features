@@ -1,4 +1,5 @@
 
+
 # Python (python)
 
 Installs the provided version of Python, as well as PIPX, and other common Python utilities.  JupyterLab is conditionally installed with the python feature. Note: May require source code compilation.
@@ -7,7 +8,7 @@ Installs the provided version of Python, as well as PIPX, and other common Pytho
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/python:1": {}
+    "ghcr.io/samruddhikhandale/features/python:1": {}
 }
 ```
 
@@ -33,4 +34,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/python/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/python/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

@@ -1,4 +1,5 @@
 
+
 # AWS CLI (aws-cli)
 
 Installs the AWS CLI along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like gpg.
@@ -7,7 +8,7 @@ Installs the AWS CLI along with needed dependencies. Useful for base Dockerfiles
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/aws-cli:1": {}
+    "ghcr.io/samruddhikhandale/features/aws-cli:1": {}
 }
 ```
 
@@ -28,4 +29,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/aws-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/aws-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

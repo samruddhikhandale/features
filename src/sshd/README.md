@@ -1,4 +1,5 @@
 
+
 # SSH server (sshd)
 
 Adds a SSH server into a container so that you can use an external terminal, sftp, or SSHFS to interact with it.
@@ -7,7 +8,7 @@ Adds a SSH server into a container so that you can use an external terminal, sft
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/sshd:1": {}
+    "ghcr.io/samruddhikhandale/features/sshd:1": {}
 }
 ```
 
@@ -90,4 +91,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/sshd/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/sshd/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
