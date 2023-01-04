@@ -1,4 +1,5 @@
 
+
 # Docker (Docker-in-Docker) (docker-in-docker)
 
 Create child containers *inside* a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.
@@ -7,7 +8,7 @@ Create child containers *inside* a container, independent from the host's docker
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/samruddhikhandale/features/docker-in-docker:2": {}
 }
 ```
 
@@ -38,4 +39,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/docker-in-docker/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/docker-in-docker/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

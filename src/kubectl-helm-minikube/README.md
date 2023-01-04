@@ -1,4 +1,5 @@
 
+
 # Kubectl, Helm, and Minikube (kubectl-helm-minikube)
 
 Installs latest version of kubectl, Helm, and optionally minikube. Auto-detects latest versions and installs needed dependencies.
@@ -7,7 +8,7 @@ Installs latest version of kubectl, Helm, and optionally minikube. Auto-detects 
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {}
+    "ghcr.io/samruddhikhandale/features/kubectl-helm-minikube:1": {}
 }
 ```
 
@@ -42,4 +43,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/kubectl-helm-minikube/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/samruddhikhandale/features/blob/main/src/kubectl-helm-minikube/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
