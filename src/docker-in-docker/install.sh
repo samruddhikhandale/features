@@ -376,8 +376,6 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
         mount -t securityfs none /sys/kernel/security || {
             echo >&2 'Could not mount /sys/kernel/security.'
             echo >&2 'AppArmor detection and --privileged mode might break.'
-            echo >&2 ""
-            echo >&2 'Please confirm passing --privileged flag!'
         }
     fi
 
@@ -402,14 +400,23 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
     }
 
     # Set cgroup nesting, retrying if necessary
-    set +e
-        set_cgroup_nesting
-        if [ $? -ne 0 ]; then
-            echo >&2 "cgroup v2: failed to enable nesting, retrying once..."
-            set -e
+    retry_cgroup_nesting=0
+    cgroup_ok="false"
+
+    until [ "${cgroup_ok}" = "true"  ] || [ "${retry_cgroup_nesting}" -eq "5" ];
+    do
+        set +e
             set_cgroup_nesting
-        fi
-    set -e
+
+            if [ $? -ne 0 ]; then
+                echo "(*) cgroup v2: Failed to enable nesting, retrying..."
+            else
+                cgroup_ok="true"
+            fi
+
+            retry_cgroup_nesting=`expr $retry_cgroup_nesting + 1`
+        set -e
+    done 
 
     # -- End: dind wrapper script --
 
@@ -418,11 +425,12 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
         cat /etc/resolv.conf | grep -i 'internal.cloudapp.net' > /dev/null 2>&1
         if [ $? -eq 0 ] && [ "${AZURE_DNS_AUTO_DETECTION}" = "true" ]
         then
+            echo "Setting dockerd Azure DNS."
             CUSTOMDNS="--dns 168.63.129.16"
         else
+            echo "Not setting dockerd DNS manually."
             CUSTOMDNS=""
         fi
-
     set -e
 
     if [ -z "$DOCKER_DEFAULT_ADDRESS_POOL" ]
