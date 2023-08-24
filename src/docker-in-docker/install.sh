@@ -367,7 +367,7 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
     find /run /var/run -iname 'docker*.pid' -delete || :
     find /run /var/run -iname 'container*.pid' -delete || :
 
-    ## Dind wrapper script from docker team, adapted to a function
+    # -- Start: dind wrapper script --
     # Maintained: https://github.com/moby/moby/blob/master/hack/dind
 
     export container=docker
@@ -376,6 +376,8 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
         mount -t securityfs none /sys/kernel/security || {
             echo >&2 'Could not mount /sys/kernel/security.'
             echo >&2 'AppArmor detection and --privileged mode might break.'
+            echo >&2 ""
+            echo >&2 'Please confirm passing --privileged flag!'
         }
     fi
 
@@ -384,30 +386,42 @@ dockerd_start="AZURE_DNS_AUTO_DETECTION=${AZURE_DNS_AUTO_DETECTION} DOCKER_DEFAU
         mount -t tmpfs none /tmp
     fi
 
-    # cgroup v2: enable nesting
-    if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
-        # move the processes from the root group to the /init group,
-        # otherwise writing subtree_control fails with EBUSY.
-        # An error during moving non-existent process (i.e., "cat") is ignored.
-        mkdir -p /sys/fs/cgroup/init
-        xargs -rn1 < /sys/fs/cgroup/cgroup.procs > /sys/fs/cgroup/init/cgroup.procs || :
-        # enable controllers
-        sed -e 's/ / +/g' -e 's/^/+/' < /sys/fs/cgroup/cgroup.controllers \
-            > /sys/fs/cgroup/cgroup.subtree_control
-    fi
-    ## Dind wrapper over.
+    set_cgroup_nesting()
+    {
+        # cgroup v2: enable nesting
+        if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+            # move the processes from the root group to the /init group,
+            # otherwise writing subtree_control fails with EBUSY.
+            # An error during moving non-existent process (i.e., "cat") is ignored.
+            mkdir -p /sys/fs/cgroup/init
+            xargs -rn1 < /sys/fs/cgroup/cgroup.procs > /sys/fs/cgroup/init/cgroup.procs || :
+            # enable controllers
+            sed -e 's/ / +/g' -e 's/^/+/' < /sys/fs/cgroup/cgroup.controllers \
+                > /sys/fs/cgroup/cgroup.subtree_control
+        fi
+    }
+
+    # Set cgroup nesting, retrying if necessary
+    set +e
+        set_cgroup_nesting
+        if [ $? -ne 0 ]; then
+            echo >&2 "cgroup v2: failed to enable nesting, retrying once..."
+            set -e
+            set_cgroup_nesting
+        fi
+    set -e
+
+    # -- End: dind wrapper script --
 
     # Handle DNS
     set +e
-    cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-    if [ $? -eq 0 ] && [ "${AZURE_DNS_AUTO_DETECTION}" = "true" ]
-    then
-        echo "Setting dockerd Azure DNS."
-        CUSTOMDNS="--dns 168.63.129.16"
-    else
-        echo "Not setting dockerd DNS manually."
-        CUSTOMDNS=""
-    fi
+        cat /etc/resolv.conf | grep -i 'internal.cloudapp.net' > /dev/null 2>&1
+        if [ $? -eq 0 ] && [ "${AZURE_DNS_AUTO_DETECTION}" = "true" ]
+        then
+            CUSTOMDNS="--dns 168.63.129.16"
+        else
+            CUSTOMDNS=""
+        fi
 
     set -e
 
