@@ -1,17 +1,6 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-    },
-    "postCreateCommand": "npm install -g @devcontainers/cli",
-    "hostRequirements": {
-        "cpus": 4
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "mads-hartmann.bash-ide-vscode"
-            ]
-        }
+        "./src/common-utils": {}
     }
 }
